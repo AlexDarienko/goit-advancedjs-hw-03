@@ -1,0 +1,11 @@
+import{a as u,S as f,i}from"./assets/vendor-Sa4a0LJu.js";(function(){const t=document.createElement("link").relList;if(t&&t.supports&&t.supports("modulepreload"))return;for(const e of document.querySelectorAll('link[rel="modulepreload"]'))a(e);new MutationObserver(e=>{for(const o of e)if(o.type==="childList")for(const n of o.addedNodes)n.tagName==="LINK"&&n.rel==="modulepreload"&&a(n)}).observe(document,{childList:!0,subtree:!0});function r(e){const o={};return e.integrity&&(o.integrity=e.integrity),e.referrerPolicy&&(o.referrerPolicy=e.referrerPolicy),e.crossOrigin==="use-credentials"?o.credentials="include":e.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function a(e){if(e.ep)return;e.ep=!0;const o=r(e);fetch(e.href,o)}})();const m="49359738-1a7aad8ecd2da3da8f5235c9c",p="https://pixabay.com/api/";async function g(s){try{return(await u.get(p,{params:{key:m,q:s,image_type:"photo",orientation:"horizontal",safesearch:!0}})).data}catch(t){throw console.error("Error fetching images:",t),new Error("Failed to fetch images")}}const c=document.querySelector(".gallery");function h(s){if(l(),s.length===0)throw new Error("No images found");const t=s.map(r=>`
+    <a class="gallery-item" href="${r.largeImageURL}">
+      <img class="gallery-image" src="${r.webformatURL}" alt="${r.tags}" />
+      <div class="image-info">
+        <p><strong>Likes:</strong> ${r.likes}</p>
+        <p><strong>Views:</strong> ${r.views}</p>
+        <p><strong>Comments:</strong> ${r.comments}</p>
+        <p><strong>Downloads:</strong> ${r.downloads}</p>
+      </div>
+    </a>`).join("");c.insertAdjacentHTML("beforeend",t),L()}function l(){c.innerHTML=""}let y=new f(".gallery a");function L(){y.refresh()}const w=document.querySelector("#search-form"),b=document.querySelector("#search-input"),d=document.querySelector(".loader");w.addEventListener("submit",async s=>{s.preventDefault();const t=b.value.trim();if(!t){i.error({title:"Error",message:"Please enter a search term!"});return}v(),l();try{const r=await g(t);h(r.hits)}catch(r){i.error({title:"Error",message:r.message})}finally{E()}});function v(){d.classList.add("visible")}function E(){d.classList.remove("visible")}
+//# sourceMappingURL=index.js.map
